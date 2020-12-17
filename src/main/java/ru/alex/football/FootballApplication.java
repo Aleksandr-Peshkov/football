@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ru.alex.football.model.Trainer;
 import ru.alex.football.repository.TrainerRepository;
 
+import java.io.IOException;
+
 @SpringBootApplication
 public class FootballApplication implements CommandLineRunner {
 
@@ -19,13 +21,17 @@ public class FootballApplication implements CommandLineRunner {
         SpringApplication.run(FootballApplication.class, args);
     }
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws IOException {
+
         print("BRUH MOMENT");
-        Trainer trainer= new Trainer();
-        trainer.name="Dodik";
-        trainerRepository.save(trainer);
+        Character a=(char)System.in.read();
+        print(a);
+        //print(trainerRepository.govno());
+        //Trainer trainer= new Trainer();
+        //trainer.name="Dodik";
+        //trainerRepository.save(trainer);
     }
-    public void print(String text){
+    public void print(Object text){
         System.out.println(text);
     }
 }
