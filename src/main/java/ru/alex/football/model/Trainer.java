@@ -6,6 +6,6 @@ import javax.persistence.Id;
 @Entity //класс отвечает за репрезентацию табл в бд
 public class Trainer {
     @Id
-    Integer id;
-    String name;
+    public Integer id;
+    public String name;
 }
