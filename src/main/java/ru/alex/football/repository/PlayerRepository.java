@@ -3,10 +3,10 @@ package ru.alex.football.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.alex.football.model.Trainer;
+import ru.alex.football.model.Player;
 
 @Repository
-public interface TrainerRepository extends CrudRepository<Trainer,Integer> {
-@Query(value = "select 'Катя лох';",nativeQuery = true)
-    public String govno();
+public interface PlayerRepository extends CrudRepository<Player,Integer> {
+    @Query(value = "select 'Player';",nativeQuery = true)
+    public String func();
 }

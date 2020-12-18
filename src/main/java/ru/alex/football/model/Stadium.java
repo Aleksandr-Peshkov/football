@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+
 @Entity //класс отвечает за репрезентацию табл в бд
 public class Stadium {
     @Id
@@ -12,5 +13,7 @@ public class Stadium {
     @GeneratedValue(generator = "stadiumSequence")
     public Integer id;
     public String name;
-    //sfsdofhdsfh
+    public String city;
+    public Integer capacity;
+
 }
