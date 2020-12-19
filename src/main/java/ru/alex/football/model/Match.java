@@ -13,7 +13,7 @@ public class Match {
 
     @ManyToOne
     @JoinColumn(name = "stadium_id")
-    public Stadium stadium;//аыаываы
+    public Stadium stadium;
 
     public Date date;
 }

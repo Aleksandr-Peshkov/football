@@ -19,6 +19,6 @@ public class Goal {
     @JoinColumn(name = "player_id")
     public TeamMatch player;
 
-    public Byte score;
+    public Integer score;
     public Time time;
 }
