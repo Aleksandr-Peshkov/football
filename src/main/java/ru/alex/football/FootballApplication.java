@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ru.alex.football.model.*;
 import ru.alex.football.repository.*;
+import ru.alex.football.repository.bruh.PlayingSup;
+import ru.alex.football.repository.bruh.TeamMatchSup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +16,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
+import java.util.List;
 
 @SpringBootApplication
 public class FootballApplication implements CommandLineRunner {
@@ -95,13 +97,13 @@ public class FootballApplication implements CommandLineRunner {
             {
                 case ("1"):
                     //Даты встреч команды, ее противник и счет
-                    date_match_team_score();
+                    //date_match_team_score();
                     break;
                 case ("2"):
                     name_number();
                     break;
                 case ("3"):
-                    System.out.println("У нас тут тепло");
+                    resultant();
                     break;
                 case ("4"):
                     System.out.println("Котлеьки в обед");
@@ -159,7 +161,9 @@ public class FootballApplication implements CommandLineRunner {
         print("\nВведите название команды: ");
         String name_team=reader.readLine();
 
-        playingRepository.date_team_score;
+        List<PlayingSup> psList=playingRepository.date_match_team_score(name_team);
+        print("\n");
+        print(psList);
     }
     public void name_number() throws IOException, ParseException {
         //ФИО и номера игроков, участвовавших во встрече (по названию команды, городу и дате встречи)
@@ -169,10 +173,11 @@ public class FootballApplication implements CommandLineRunner {
         String city=reader.readLine();
         print("\nВведите дату матча в формате ГГГГ/ММ/ДД: ");
         Date date=string_in_date(reader.readLine());
-        List<>=teamMatchRepository.name_number_by_team_city_date(name_team,city,date);
-        System.out.print();
+        List<TeamMatchSup> tmsList=teamMatchRepository.name_number_by_team_city_date(name_team,city,date);
+        print("\n");
+        System.out.print(tmsList);
     }
-    public void resultant(){
+    public void resultant() throws IOException, ParseException {
         //результативность данного игрока в данной встрече (по названию команды, городу, дате встречи и ФИО игрока)
         print("\nВведите название команды: ");
         String name_team=reader.readLine();
@@ -234,7 +239,8 @@ public class FootballApplication implements CommandLineRunner {
     }
     public boolean add_match() throws IOException, ParseException {
         Match match=new Match();
-        Playing playing=new Playing();
+        Playing playing1=new Playing();
+        Playing playing2=new Playing();
 
         print("\nВведите дату матча в формате ДД/ММ/ГГГГ: ");
         String data=reader.readLine();
@@ -250,7 +256,8 @@ public class FootballApplication implements CommandLineRunner {
         matchRepository.save(match);
 
         match=matchRepository.get_match_by_param(match.date,match.stadium.id);
-        playing.match=match;
+        playing1.match=match;
+        playing2.match=match;
 
         print("\nВведите название первой команды: ");
         String team_name_1=reader.readLine();
@@ -263,11 +270,11 @@ public class FootballApplication implements CommandLineRunner {
         print("\nВведите город второй команды: ");
         String team_city_2=reader.readLine();
 
-        playing.team=teamRepository.get_team_by_param(team_name_1,team_city_1);
-        playingRepository.save(playing);
+        playing1.team=teamRepository.get_team_by_param(team_name_1,team_city_1);
+        playingRepository.save(playing1);
 
-        playing.team=teamRepository.get_team_by_param(team_name_2,team_city_2);
-        playingRepository.save(playing);
+        playing2.team=teamRepository.get_team_by_param(team_name_2,team_city_2);
+        playingRepository.save(playing2);
 
         return true;
     }
